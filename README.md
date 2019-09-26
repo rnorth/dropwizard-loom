@@ -36,7 +36,7 @@ After changing configuration, the image should be rebuilt.
 
 ### Testing performance
 
-Use `slow-cooker` to generate load, e.g.:
+Use [`slow-cooker`](https://github.com/BuoyantIO/slow_cooker) to generate load, e.g.:
 
 ```shell script
 $ docker run --net host -it buoyantio/slow_cooker -qps 10 -concurrency 100 http://localhost:8080/

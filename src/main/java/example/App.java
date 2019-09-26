@@ -3,37 +3,24 @@
  */
 package example;
 
-import java.lang.FiberScope;
-import java.util.concurrent.CountDownLatch;
+import io.dropwizard.Application;
+import io.dropwizard.Configuration;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
 
-public class App {
-
-    private static final int LOOPS = 1_000_000;
-
-    public String getGreeting() {
-        return "Hello world.";
+public class App extends Application<Configuration> {
+    public static void main(String[] args) throws Exception {
+        new App().run("server", "config.yml");
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    @Override
+    public void initialize(Bootstrap<Configuration> bootstrap) {
+        // nothing to do yet
+    }
 
-        CountDownLatch latch = new CountDownLatch(LOOPS);
-
-        for (int i = 0; i < LOOPS; i++) {
-            FiberScope.background().schedule(() -> {
-//                System.out.println("Running in: " + Thread.currentThread().getName());
-
-                try {
-                    Thread.sleep(100L);
-                } catch (InterruptedException e) {
-                    throw new UnsupportedOperationException(); // TODO: Replace
-                }
-//                System.out.println("done");
-                latch.countDown();
-            });
-        }
-
-        System.out.println(new App().getGreeting());
-
-        latch.await();
+    @Override
+    public void run(Configuration configuration,
+                    Environment environment) {
+        environment.jersey().register(ApiResource.class);
     }
 }

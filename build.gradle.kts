@@ -25,6 +25,12 @@ repositories {
 dependencies {
     // This dependency is used by the application.
     implementation("com.google.guava:guava:28.0-jre")
+    implementation("io.dropwizard:dropwizard-core:1.3.14")
+
+    implementation("javax.xml.bind:jaxb-api:2.2.11")
+    implementation("com.sun.xml.bind:jaxb-core:2.2.11")
+    implementation("com.sun.xml.bind:jaxb-impl:2.2.11")
+    implementation("javax.activation:activation:1.1.1")
 
     // Use JUnit test framework
     testImplementation("junit:junit:4.12")
